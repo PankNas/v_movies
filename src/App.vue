@@ -6,11 +6,11 @@ import VFooter from '@/components/VFooter.vue'
 
 <template>
   <body class="body">
-  <main class="main">
-    <Logo />
-    <Search />
-  </main>
-  <VFooter />
+    <main class="main">
+      <Logo />
+      <Search />
+    </main>
+    <VFooter />
   </body>
 </template>
 

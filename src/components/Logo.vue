@@ -1,17 +1,17 @@
 <script lang="ts">
 export default {
-  name: "Logo"
+  name: 'Logo'
 }
 </script>
 
 <template>
   <div class="logo">
-    <img src="@/assets/images/symbol-t.png" alt="" class="image_symbol">
+    <img src="@/assets/images/symbol-t.png" alt="" class="image_symbol" />
     <span class="wrapper">
-      <img src="@/assets/images/play.png" alt="" class="image">
-      <img src="@/assets/images/stop.png" alt="" class="image">
+      <img src="@/assets/images/play.png" alt="" class="image" />
+      <img src="@/assets/images/stop.png" alt="" class="image" />
     </span>
-    <img src="@/assets/images/symbol-p.png" alt="" class="image_symbol">
+    <img src="@/assets/images/symbol-p.png" alt="" class="image_symbol" />
   </div>
 </template>
 

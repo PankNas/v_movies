@@ -12,7 +12,7 @@ function handleSearch() {
     return
   }
 
-  const oldHistory = JSON.parse(sessionStorage.getItem('history')) || []
+  const oldHistory = JSON.parse(sessionStorage.getItem('history') as string) || []
 
   if (!oldHistory.includes(model.value)) {
     const newHistory = [model.value, ...oldHistory].slice(0, 20) // ограничение на хранение истории поиска
