@@ -20,16 +20,22 @@ function handleSearch() {
     history.value = newHistory
     sessionStorage.setItem('history', JSON.stringify([...newHistory]))
   }
+}
 
-  model.value = ''
+function clickHistoryItem(index: number) {
+  const historyItem = history.value[index]
+
+  history.value.splice(index, 1)
+  history.value.unshift(historyItem)
+  model.value = historyItem
 }
 </script>
 
 <template>
   <div class="search">
-    <div class="search__line">
+    <div class="search__line" :class="{ search__line_active: history }">
       <button @click="handleSearch" class="search__buttonIcon">
-        <img src="@/assets/images/search.svg" alt="search-glass" />
+        <img src="../assets/images/search.svg" alt="search-glass" />
       </button>
       <input
         type="text"
@@ -59,7 +65,7 @@ function handleSearch() {
       </button>
     </div>
 
-    <History :history="history" />
+    <History :history="history" @click-history-item="clickHistoryItem" />
   </div>
 </template>
 
@@ -79,6 +85,12 @@ function handleSearch() {
   box-sizing: border-box;
   margin: 0 auto;
   align-items: center;
+}
+
+.search__line_active {
+  width: 100%;
+  border-bottom-color: #fdce25;
+  padding: 18px 0;
 }
 
 .search__input {
