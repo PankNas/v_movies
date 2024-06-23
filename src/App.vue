@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Logo from '@/components/Logo.vue'
-import Search from '@/components/Search.vue'
 import VFooter from '@/components/VFooter.vue'
+import Search from '@/components/Search.vue'
 </script>
 
 <template>

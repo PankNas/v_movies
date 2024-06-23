@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import History from '@/components/History.vue'
+import History from './History.vue'
 import { ref } from 'vue'
 
 const model = defineModel<string>()
@@ -20,6 +20,8 @@ function handleSearch() {
     history.value = newHistory
     sessionStorage.setItem('history', JSON.stringify([...newHistory]))
   }
+
+  setSearchParams()
 }
 
 function clickHistoryItem(index: number) {
@@ -28,6 +30,17 @@ function clickHistoryItem(index: number) {
   history.value.splice(index, 1)
   history.value.unshift(historyItem)
   model.value = historyItem
+
+  setSearchParams()
+}
+
+function setSearchParams() {
+  const searchParams = new URLSearchParams()
+  searchParams.set('s', String(model.value))
+
+  const url = new URL(location.href)
+  url.search = String(searchParams)
+  window.history.pushState({ path: url.href }, '', url.href)
 }
 </script>
 
