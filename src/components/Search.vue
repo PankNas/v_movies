@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import History from '@/components/History.vue'
+import { ref } from 'vue'
 
-const model = defineModel()
+const model = defineModel<string>()
+const history = ref<string[]>(JSON.parse(sessionStorage.getItem('history') as string) || [])
 
 function handleClickDelete() {
   model.value = ''
@@ -12,11 +14,11 @@ function handleSearch() {
     return
   }
 
-  const oldHistory = JSON.parse(sessionStorage.getItem('history') as string) || []
+  if (!history.value.includes(model.value)) {
+    const newHistory = [model.value, ...history.value].slice(0, 20) // ограничение на хранение истории поиска
 
-  if (!oldHistory.includes(model.value)) {
-    const newHistory = [model.value, ...oldHistory].slice(0, 20) // ограничение на хранение истории поиска
-    window.sessionStorage.setItem('history', JSON.stringify([...newHistory]))
+    history.value = newHistory
+    sessionStorage.setItem('history', JSON.stringify([...newHistory]))
   }
 
   model.value = ''
@@ -25,42 +27,50 @@ function handleSearch() {
 
 <template>
   <div class="search">
-    <button @click="handleSearch" class="search__buttonIcon">
-      <img src="@/assets/images/search.svg" alt="search-glass" />
-    </button>
-    <input
-      type="text"
-      class="search__input"
-      v-model="model"
-      @keydown.enter.exact="handleSearch"
-      placeholder="Поиск фильмов по жанрам и актерам"
-    />
-    <button v-show="model" @click="handleClickDelete" class="search__buttonIcon">
-      <svg
-        class="search__buttonIcon__delete"
-        width="48"
-        height="48"
-        viewBox="0 0 48 48"
-        fill="currentColor"
-        stroke-opacity="0.4"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M10.7573 10.7573L24 24M24 24L37.2426 37.2426M24 24L37.2426 10.7573M24 24L10.7573 37.2426"
-          stroke="white"
-          stroke-width="4"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-    </button>
-  </div>
+    <div class="search__line">
+      <button @click="handleSearch" class="search__buttonIcon">
+        <img src="@/assets/images/search.svg" alt="search-glass" />
+      </button>
+      <input
+        type="text"
+        class="search__input"
+        v-model="model"
+        @keydown.enter.exact="handleSearch"
+        placeholder="Поиск фильмов по жанрам и актерам"
+      />
+      <button v-show="model" @click="handleClickDelete" class="search__buttonIcon">
+        <svg
+          class="search__buttonIcon__delete"
+          width="48"
+          height="48"
+          viewBox="0 0 48 48"
+          fill="currentColor"
+          stroke-opacity="0.4"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M10.7573 10.7573L24 24M24 24L37.2426 37.2426M24 24L37.2426 10.7573M24 24L10.7573 37.2426"
+            stroke="white"
+            stroke-width="4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </div>
 
-  <History />
+    <History :history="history" />
+  </div>
 </template>
 
 <style scoped>
 .search {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.search__line {
   display: flex;
   gap: 13px;
   padding: 18px 71px;
