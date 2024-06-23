@@ -15,7 +15,24 @@ import VFooter from '@/components/VFooter.vue'
 </template>
 
 <style>
+@font-face {
+  font-weight: 400;
+  font-family: Roboto;
+  font-style: normal;
+  src: url('./assets/fonts/Roboto-Regular.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: 700;
+  font-family: Roboto;
+  font-style: normal;
+  src: url('./assets/fonts/Roboto-Bold.woff') format('woff');
+  font-display: swap;
+}
+
 * {
+  font-family: Roboto, sans-serif;
   margin: 0;
   box-sizing: border-box;
 }

@@ -65,7 +65,7 @@ function handleSearch() {
   gap: 13px;
   padding: 18px 71px;
   border-bottom: 2px solid #fff;
-  width: 628px;
+  width: 635px;
   box-sizing: border-box;
   margin: 0 auto;
   align-items: center;

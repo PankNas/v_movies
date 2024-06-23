@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <p class="footer">© 2024 Тинькофф Прокат</p>
+  <footer class="footer">© 2024 Тинькофф Прокат</footer>
 </template>
 
 <style scoped>
@@ -11,5 +11,7 @@
   text-align: center;
   margin: 0 auto;
   flex-shrink: 0;
+  font-size: 12px;
+  line-height: 14px;
 }
 </style>
